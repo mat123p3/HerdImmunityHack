@@ -18,3 +18,8 @@ h6{
 p {
   color: rgb(206, 95, 5);
 }
+.tab{
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: rgb(85, 54, 223)
+}

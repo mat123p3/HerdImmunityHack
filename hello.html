@@ -2,10 +2,24 @@
   <head>
     <link rel="stylesheet" href="hello.css">
   </head>
+  <div class="tab">
+    <button class="tablinks" onclick="openTrust(event, 'Basic')">Basic</button>
+    <button class="tablinks" onclick="openTrust(event, 'Advanced')">Advanced</button>
+  </div>
+  <div id="Basic" class="tabcontent">
+    <h3>Basic</h3>
+    <p>Fetched Basic info here</p>
+    <span onclick="this.parentElement.style.display='none'">x</span>
+  </div>
+  <div id="Advanced" class="tabcontent">
+    <h3>Advanced</h3>
+    <p>Fetched Advanced info here</p>
+    <span onclick="this.parentElement.style.display='none'">x</span>
+  </div>
+  <script src="Tab_functions.js"></script>
   <body>
-    <h1>New Extension.</h1>
-    <h3>I am in Computer Engineering!</h3>
+    <h1>Herd Immunity</h1>
+    <h3>Defending each other, together!</h3>
     <h6>Hacking is so much fun, I can't wait for next time.</h6>
   </body>
-
 </html>
