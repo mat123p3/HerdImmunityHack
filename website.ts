@@ -1,49 +1,4 @@
-void Database(){
-
-}
-string URL;
-
-// Class Files
-void constructor(){};
-void ~constructor(){};
-int rank_URL(){};
-
-Class Website { // Default or neutral for new or unranked URL's.
-    private:
-        int total_reviews = 0; // initializes review number to 0;
-        vector<int> rankings; // creates dynamic array for ranking 
-        string Stored_URL; // Stores URL's, rankings and color
-
-    public:
-        string get_URL();
-        string set_URL();
-        void print_URL();
-}
-
-Class ranked_Website: public Website { // Takes ranked website and assigns it a color depending on ranking percentage
-    private: 
-        float ranking_percentage = 0.0;
-        string URL_color;
-    public:
-        string get_ranking_percentage();
-        string set_ranking_percentage();
-        string get_URL_color();
-        string set_URL_color();
-        void print_ranked_Website();
-}
-
-// UI Functions: Executes once a URL link has been clicked on. Displays URL rank and color. If ranking is "Black", redirects URL
-void Basic(URL){  // Color and Ranking Percentage
-    
-};
-
-void Advanced(){ // Popup of extracted data of website, and same info as Basic
-
-};
-
-//**Chatgpt Response**//
-
-Website (base class) — TypeScript
+// Website (Base Class)
 
 export class Website {
   protected storedUrl: string
@@ -74,7 +29,7 @@ export class Website {
   }
 }
 
-RankedWebsite (derived class)
+// RankedWebsite (derived class)
 
 export class RankedWebsite extends Website {
   private rankingPercentage = 0
@@ -109,8 +64,6 @@ export class RankedWebsite extends Website {
   }
 }
 
-“Database” layer (in-memory, extension-friendly)
-
 export class WebsiteDatabase {
   private sites = new Map<string, RankedWebsite>()
 
@@ -128,9 +81,6 @@ export class WebsiteDatabase {
   }
 }
 
-UI logic (TypeScript → HTML)
-//**Typescript**//
-
 export function Basic(site: RankedWebsite): void {
   const urlEl = document.getElementById("url")!
   const ratingEl = document.getElementById("rating")!
@@ -145,32 +95,3 @@ export function Basic(site: RankedWebsite): void {
     window.location.href = "https://redirect.example.com"
   }
 }
-
-Minimal HTML example
-//**HTML**//
-
-<div>
-  <p>URL: <span id="url"></span></p>
-  <p>Rating: <span id="rating"></span></p>
-  <p>Trust Level: <span id="color"></span></p>
-</div>
-
-CSS color binding
-//**CSS**//
-
-.black { color: black; }
-.red { color: red; }
-.orange { color: orange; }
-.yellow { color: goldenrod; }
-.green { color: green; }
-
-How this fits into your Chrome extension
-//**SCSS**//
-
-content script
-   ↓
-TypeScript ranking engine
-   ↓
-UI display (popup or injected badge)
-   ↓
-if shouldBlock → redirect via declarativeNetRequest
