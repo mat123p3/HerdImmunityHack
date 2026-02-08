@@ -3,17 +3,23 @@
   "description": "Database & Popup release",
   "version": "1.4",
   "manifest_version": 3,
-  
+
   "permissions": [
     "tabs",
     "webNavigation",
     "storage"
   ],
+
   "host_permissions": [
-    "<all_urls>"
+    "http://*/*",
+    "https://*/*"
   ],
 
   "background": {
     "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_title": "Herd Immunity"
   }
 }

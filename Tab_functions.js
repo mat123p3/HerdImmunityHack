@@ -1,14 +1,9 @@
-// Tab_functions.js
 function openTrust(evt, tabName) {
-  let i, tabcontent, tablinks;
+  const tabcontent = document.getElementsByClassName("tabcontent");
+  for (let i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
 
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
+  const tablinks = document.getElementsByClassName("tablinks");
+  for (let i = 0; i < tablinks.length; i++) {
     tablinks[i].className = tablinks[i].className.replace(" active", "");
   }
 
@@ -17,5 +12,9 @@ function openTrust(evt, tabName) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("defaultOpen").click();
+  document.querySelectorAll(".tablinks").forEach((btn) => {
+    btn.addEventListener("click", (evt) => openTrust(evt, btn.dataset.tab));
+  });
+
+  document.getElementById("defaultOpen")?.click();
 });
