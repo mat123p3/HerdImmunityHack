@@ -1,19 +1,179 @@
-const Database(){
+void Database(){
 
 }
+string URL;
 
 // Class Files
+void constructor(){};
+void ~constructor(){};
+int rank_URL(){};
 
-Class Website {
+Class Website { // Default or neutral for new or unranked URL's.
+    private:
+        int total_reviews = 0; // initializes review number to 0;
+        vector<int> rankings; // creates dynamic array for ranking 
+        string Stored_URL; // Stores URL's, rankings and color
+
     public:
-
-    string URL;
+        string get_URL();
+        string set_URL();
+        void print_URL();
 }
 
-Class ranking_color: public Website {
-    public: 
-        float ranking_percentage = 0.0;
+Class ranked_Website: public Website { // Takes ranked website and assigns it a color depending on ranking percentage
     private: 
+        float ranking_percentage = 0.0;
+        string URL_color;
+    public:
+        string get_ranking_percentage();
+        string set_ranking_percentage();
+        string get_URL_color();
+        string set_URL_color();
+        void print_ranked_Website();
 }
+
+// UI Functions: Executes once a URL link has been clicked on. Displays URL rank and color. If ranking is "Black", redirects URL
+void Basic(URL){  // Color and Ranking Percentage
+    
+};
+
+void Advanced(){ // Popup of extracted data of website, and same info as Basic
+
+};
+
+//**Chatgpt Response**//
+
+Website (base class) — TypeScript
+
+export class Website {
+  protected storedUrl: string
+  protected rankings: number[] = []
+
+  constructor(url: string) {
+    this.storedUrl = url
+  }
+
+  addReview(rating: number): void {
+    if (rating >= 1 && rating <= 5) {
+      this.rankings.push(rating)
+    }
+  }
+
+  get url(): string {
+    return this.storedUrl
+  }
+
+  get totalReviews(): number {
+    return this.rankings.length
+  }
+
+  get averageRating(): number {
+    if (this.rankings.length === 0) return 0
+    const sum = this.rankings.reduce((a, b) => a + b, 0)
+    return sum / this.rankings.length
+  }
+}
+
+RankedWebsite (derived class)
+
+export class RankedWebsite extends Website {
+  private rankingPercentage = 0
+  private urlColor = "Gray"
+
+  calculateRanking(): void {
+    this.rankingPercentage = (this.averageRating / 5) * 100
+
+    if (this.rankingPercentage < 20) {
+      this.urlColor = "Black"    // blocked
+    } else if (this.rankingPercentage < 40) {
+      this.urlColor = "Red"
+    } else if (this.rankingPercentage < 60) {
+      this.urlColor = "Orange"
+    } else if (this.rankingPercentage < 80) {
+      this.urlColor = "Yellow"
+    } else {
+      this.urlColor = "Green"
+    } 
+  }
+
+  get percentage(): number {
+    return this.rankingPercentage
+  }
+
+  get color(): string {
+    return this.urlColor
+  }
+
+  get shouldBlock(): boolean {
+    return this.urlColor === "Black"
+  }
+}
+
+“Database” layer (in-memory, extension-friendly)
+
+export class WebsiteDatabase {
+  private sites = new Map<string, RankedWebsite>()
+
+  getSite(url: string): RankedWebsite {
+    if (!this.sites.has(url)) {
+      this.sites.set(url, new RankedWebsite(url))
+    }
+    return this.sites.get(url)!
+  }
+
+  addReview(url: string, rating: number): void {
+    const site = this.getSite(url)
+    site.addReview(rating)
+    site.calculateRanking()
+  }
+}
+
+UI logic (TypeScript → HTML)
+//**Typescript**//
+
+export function Basic(site: RankedWebsite): void {
+  const urlEl = document.getElementById("url")!
+  const ratingEl = document.getElementById("rating")!
+  const colorEl = document.getElementById("color")!
+
+  urlEl.textContent = site.url
+  ratingEl.textContent = `${site.percentage.toFixed(1)}%`
+  colorEl.textContent = site.color
+  colorEl.className = site.color.toLowerCase()
+
+  if (site.shouldBlock) {
+    window.location.href = "https://redirect.example.com"
+  }
+}
+
+Minimal HTML example
+//**HTML**//
+
+<div>
+  <p>URL: <span id="url"></span></p>
+  <p>Rating: <span id="rating"></span></p>
+  <p>Trust Level: <span id="color"></span></p>
+</div>
+
+CSS color binding
+//**CSS**//
+
+.black { color: black; }
+.red { color: red; }
+.orange { color: orange; }
+.yellow { color: goldenrod; }
+.green { color: green; }
+
+How this fits into your Chrome extension
+//**SCSS**//
+
+content script
+   ↓
+TypeScript ranking engine
+   ↓
+UI display (popup or injected badge)
+   ↓
+if shouldBlock → redirect via declarativeNetRequest
+
 
 
