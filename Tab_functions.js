@@ -1,4 +1,4 @@
-function openTrust(evt, tabName) {
+function openTrust(evt, tabName) { /* Functionality for opening details on scan */ 
   const tabcontent = document.getElementsByClassName("tabcontent");
   for (let i = 0; i < tabcontent.length; i++) tabcontent[i].style.display = "none";
 
