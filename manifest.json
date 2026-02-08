@@ -1,9 +1,19 @@
 {
-  "name": "Extension Test",
-  "description": "colour update",
+  "name": "Herd Immunity",
+  "description": "Database & Popup release",
   "version": "1.4",
   "manifest_version": 3,
-  "action": {
-    "default_popup": "hello.html"
+  
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
   }
 }
